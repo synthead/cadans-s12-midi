@@ -10,7 +10,7 @@ namespace CadansS12 {
     }
 
     pinMode(CADANS_S12_KEY_PIN, OUTPUT);
-    set_key();
+    write_key();
 
     pinMode(CADANS_S12_CLOCK_PIN, INPUT);
     attachInterrupt(digitalPinToInterrupt(CADANS_S12_CLOCK_PIN), handle_clock, LOW);
@@ -22,15 +22,15 @@ namespace CadansS12 {
 
   void handle_read() {
     key_location = 0;
-    set_key();
+    write_key();
   }
 
   void handle_clock() {
     key_location++;
-    set_key();
+    write_key();
   }
 
-  void set_key() {
+  void write_key() {
     if (key_location <= CADANS_S12_KEY_LOCATIONS) {
       // FIXME: this workaround is so dumb
       digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);

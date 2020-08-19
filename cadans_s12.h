@@ -13,7 +13,7 @@ namespace CadansS12 {
   void setup();
   void handle_read();
   void handle_clock();
-  void set_key();
+  void write_key();
 }
 
 #endif
