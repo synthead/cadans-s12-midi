@@ -13,11 +13,10 @@ namespace CadansS12 {
     write_key();
 
     pinMode(CADANS_S12_CLOCK_PIN, INPUT);
-    attachInterrupt(digitalPinToInterrupt(CADANS_S12_CLOCK_PIN), handle_clock, LOW);
+    attachInterrupt(digitalPinToInterrupt(CADANS_S12_CLOCK_PIN), handle_clock, RISING);
 
     pinMode(CADANS_S12_READ_PIN, INPUT);
-    attachInterrupt(digitalPinToInterrupt(CADANS_S12_READ_PIN), handle_read, LOW);
-
+    attachInterrupt(digitalPinToInterrupt(CADANS_S12_READ_PIN), handle_read, RISING);
   }
 
   void handle_read() {
