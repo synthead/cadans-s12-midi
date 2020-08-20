@@ -32,4 +32,10 @@ namespace CadansS12 {
       digitalWrite(CADANS_S12_KEY_PIN, LOW);
     }
   }
+
+  void set_key_value(uint8_t key, bool value) {
+    if (key < CADANS_S12_KEY_COUNT) {
+      keys[key] = value;
+    }
+  }
 }
