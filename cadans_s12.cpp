@@ -1,14 +1,10 @@
 #include "cadans_s12.h"
 
 namespace CadansS12 {
-  volatile bool keys[CADANS_S12_KEY_COUNT];
+  volatile bool keys[CADANS_S12_KEY_COUNT] = {0};
   volatile uint8_t key_location = 0;
 
   void setup() {
-    for (int i = 0; i < CADANS_S12_KEY_COUNT; i++) {
-      keys[i] = true;
-    }
-
     pinMode(CADANS_S12_KEY_PIN, OUTPUT);
     write_key();
 
@@ -36,7 +32,7 @@ namespace CadansS12 {
       digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
       digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
     } else {
-      digitalWrite(CADANS_S12_KEY_PIN, HIGH);
+      digitalWrite(CADANS_S12_KEY_PIN, LOW);
     }
   }
 }
