@@ -27,9 +27,6 @@ namespace CadansS12 {
 
   void write_key() {
     if (key_location < CADANS_S12_KEY_COUNT) {
-      // FIXME: this workaround is so dumb
-      digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
-      digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
       digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
     } else {
       digitalWrite(CADANS_S12_KEY_PIN, LOW);
