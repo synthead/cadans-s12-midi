@@ -13,7 +13,7 @@ namespace CadansS12 {
   volatile extern bool keys[CADANS_S12_KEY_COUNT];
 
   void setup();
-  void handle_read();
+  void handle_reset();
   void handle_clock();
   void write_key();
   void set_key_value(uint8_t key, bool value);
