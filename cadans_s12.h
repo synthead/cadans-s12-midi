@@ -7,7 +7,7 @@
 #define CADANS_S12_RESET_PIN 3
 #define CADANS_S12_KEY_PIN 4
 
-#define CADANS_S12_KEY_COUNT 61
+#define CADANS_S12_KEY_COUNT 64
 
 namespace CadansS12 {
   volatile extern bool keys[CADANS_S12_KEY_COUNT];
