@@ -74,10 +74,12 @@ namespace CadansS12 {
   }
 
   void handle_clock() {
-    key_location++;
+    if (!reset_timeout_state) {
+      key_location++;
 
-    read_key();
-    write_key();
+      read_key();
+      write_key();
+    }
   }
 
   void handle_sustain() {
