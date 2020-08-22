@@ -1,12 +1,16 @@
 #include "cadans_s12.h"
+#include "midi.h"
 
 namespace CadansS12 {
-  volatile bool keys[CADANS_S12_KEY_COUNT] = {0};
+  volatile bool key_outputs[CADANS_S12_KEY_COUNT] = {0};
+  volatile bool key_inputs[CADANS_S12_KEY_COUNT] = {0};
+
   volatile uint8_t key_location = 0;
+  volatile bool new_key_input;
 
   void setup() {
-    pinMode(CADANS_S12_KEY_PIN, OUTPUT);
-    write_key();
+    pinMode(CADANS_S12_KEY_IN_PIN, INPUT);
+    pinMode(CADANS_S12_KEY_OUT_PIN, OUTPUT);
 
     pinMode(CADANS_S12_CLOCK_PIN, INPUT);
     attachInterrupt(digitalPinToInterrupt(CADANS_S12_CLOCK_PIN), handle_clock, RISING);
@@ -17,25 +21,44 @@ namespace CadansS12 {
 
   void handle_reset() {
     key_location = 0;
+
+    read_key();
     write_key();
   }
 
   void handle_clock() {
     key_location++;
+
+    read_key();
     write_key();
+  }
+
+  void read_key() {
+    if (key_location < CADANS_S12_KEY_COUNT) {
+      digitalWrite(CADANS_S12_KEY_OUT_PIN, LOW);
+      digitalWrite(CADANS_S12_KEY_OUT_PIN, LOW);
+      digitalWrite(CADANS_S12_KEY_OUT_PIN, LOW);
+
+      new_key_input = digitalRead(CADANS_S12_KEY_IN_PIN);
+
+      if (new_key_input != key_inputs[key_location]) {
+        MIDI::write_note(key_location + CADANS_S12_MIDI_TRANSPOSE, new_key_input);
+        key_inputs[key_location] = new_key_input;
+      }
+    }
   }
 
   void write_key() {
     if (key_location < CADANS_S12_KEY_COUNT) {
       digitalWrite(CADANS_S12_KEY_PIN, keys[key_location]);
     } else {
-      digitalWrite(CADANS_S12_KEY_PIN, LOW);
+      digitalWrite(CADANS_S12_KEY_OUT_PIN, LOW);
     }
   }
 
   void set_key_value(uint8_t key, bool value) {
     if (key < CADANS_S12_KEY_COUNT) {
-      keys[key] = value;
+      key_outputs[key] = value;
     }
   }
 }
