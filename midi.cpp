@@ -11,8 +11,8 @@ namespace MIDI {
 
   bool led_in_state = false;
   bool led_out_state = false;
-  unsigned long led_in_millis;
-  unsigned long led_out_millis;
+  unsigned long led_in_millis = 0;
+  unsigned long led_out_millis = 0;
 
   void setup() {
     Serial1.begin(31250);
