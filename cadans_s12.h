@@ -12,6 +12,8 @@
 
 #define CADANS_S12_MIDI_TRANSPOSE 24
 
+#define CADANS_S12_SUSTAIN_PIN 7
+
 namespace CadansS12 {
   void setup();
   void handle_reset();
@@ -19,6 +21,7 @@ namespace CadansS12 {
   void write_key();
   void read_key();
   void set_key_value(uint8_t key, bool value);
+  void handle_sustain();
 }
 
 #endif
