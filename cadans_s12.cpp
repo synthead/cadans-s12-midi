@@ -9,9 +9,17 @@ namespace CadansS12 {
   volatile bool new_key_input;
   volatile bool sustain = false;
 
+  volatile bool reset_timeout_state = true;
+  volatile unsigned long reset_timeout_millis = 0;
+  volatile bool reset_blink_state = true;
+  unsigned long reset_blink_millis = 0;
+
   void setup() {
     pinMode(CADANS_S12_KEY_IN_PIN, INPUT);
     pinMode(CADANS_S12_KEY_OUT_PIN, OUTPUT);
+    pinMode(CADANS_S12_LED_STATUS_PIN, OUTPUT);
+
+    enable_reset_timeout();
 
     pinMode(CADANS_S12_CLOCK_PIN, INPUT);
     attachInterrupt(digitalPinToInterrupt(CADANS_S12_CLOCK_PIN), handle_clock, RISING);
@@ -23,7 +31,42 @@ namespace CadansS12 {
     attachInterrupt(digitalPinToInterrupt(CADANS_S12_SUSTAIN_PIN), handle_sustain, CHANGE);
   }
 
+  void loop() {
+    if (reset_timeout_state) {
+      blink_status_led();
+    } else if (millis() - reset_timeout_millis > CADANS_S12_LED_STATUS_TIMEOUT_MS) {
+      enable_reset_timeout();
+    }
+  }
+
+  void disable_reset_timeout() {
+    reset_timeout_millis = millis();
+
+    if (reset_timeout_state) {
+      reset_blink_state = false;
+      reset_timeout_state = false;
+
+      digitalWrite(CADANS_S12_LED_STATUS_PIN, HIGH);
+    }
+  }
+
+  void enable_reset_timeout() {
+    reset_timeout_state = true;
+    digitalWrite(CADANS_S12_KEY_OUT_PIN, LOW);
+  }
+
+  void blink_status_led() {
+    if (millis() - reset_blink_millis > CADANS_S12_LED_STATUS_BLINK_MS) {
+      reset_blink_millis = millis();
+      reset_blink_state = !reset_blink_state;
+
+      digitalWrite(CADANS_S12_LED_STATUS_PIN, reset_blink_state);
+    }
+  }
+
   void handle_reset() {
+    disable_reset_timeout();
+
     key_location = 0;
 
     read_key();

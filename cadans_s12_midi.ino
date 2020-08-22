@@ -7,5 +7,6 @@ void setup() {
 }
 
 void loop() {
+  CadansS12::loop();
   MIDI::loop();
 }
