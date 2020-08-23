@@ -11,18 +11,18 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 797)
+    (start_pass_no 541)
     (layer_rule F.Cu
       (active off)
       (preferred_direction vertical)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 2.3)
+      (against_preferred_direction_trace_costs 2.7)
     )
     (layer_rule B.Cu
       (active on)
       (preferred_direction horizontal)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 1.7)
+      (against_preferred_direction_trace_costs 1.6)
     )
   )
   (rule
@@ -63,9 +63,10 @@
     )
   )
   (class "kicad_default"
-    "Net-(D1-Pad2)" "Net-(D1-Pad1)" "Net-(D2-Pad1)" "Net-(D2-Pad2)" "Net-(D3-Pad1)" "Net-(D3-Pad2)" GNDREF "Net-(D4-Pad1)"
-    "Net-(J1-Pad4)" "Net-(J2-Pad5)" "Net-(J2-Pad2)" "Net-(Q1-Pad2)" "Net-(Q1-Pad1)" "Net-(Q2-Pad1)" "Net-(Q2-Pad2)" "Net-(Q3-Pad2)"
-    +5V "Net-(R6-Pad1)" "Net-(R7-Pad1)" "Net-(R8-Pad2)"
+    "Net-(D1-Pad1)" "Net-(D1-Pad2)" GNDREF "Net-(D2-Pad1)" "Net-(D3-Pad1)" "Net-(J4-Pad1)" "Net-(J4-Pad2)" "Net-(J4-Pad4)"
+    "Net-(J4-Pad5)" "Net-(J5-Pad1)" "Net-(J10-Pad2)" "Net-(J10-Pad3)" "Net-(J10-Pad4)" "Net-(J12-Pad2)" "Net-(J12-Pad3)" "Net-(J14-Pad2)"
+    "Net-(Q1-Pad2)" "Net-(Q1-Pad1)" "Net-(Q2-Pad2)" "Net-(Q2-Pad1)" "Net-(Q3-Pad2)" "Net-(Q4-Pad1)" "Net-(Q4-Pad2)" +5V
+    "Net-(R6-Pad1)" "Net-(R7-Pad1)" "Net-(R8-Pad2)" "Net-(R13-Pad2)" "Net-(R16-Pad1)" "Net-(R17-Pad1)" "Net-(R18-Pad1)" "Net-(R19-Pad1)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
