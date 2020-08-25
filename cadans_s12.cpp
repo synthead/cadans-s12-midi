@@ -94,12 +94,9 @@ namespace CadansS12 {
 
       new_key_input = digitalRead(CADANS_S12_KEY_IN_PIN);
 
-      if (new_key_input != key_inputs[key_location]) {
-        if (!(sustain && !new_key_input)) {
-
+      if (new_key_input != key_inputs[key_location] && !(sustain && !new_key_input)) {
         MIDI::write_note(key_location + CADANS_S12_MIDI_TRANSPOSE, new_key_input);
         key_inputs[key_location] = new_key_input;
-      }
       }
     }
   }
